@@ -13,7 +13,17 @@ var io = socketIO(server);
 app.use(express.static(publicPath));
 
 io.on('connection',(socket) => {
-  console.log('Connection accepted from server');
+  console.log('Connection accepted from client');
+
+  socket.emit('newMessage', {
+    from: 'diff amp',
+    text: 'could not make it',
+    createAt: 2342
+  });
+
+  socket.on('createMessage', (message) => {
+    console.log('Message created by clinet arrived ', message);
+  });
 
   socket.on('disconnect', () => {
     console.log('Disconnected from client');
