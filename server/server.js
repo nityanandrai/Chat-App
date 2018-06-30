@@ -15,14 +15,13 @@ app.use(express.static(publicPath));
 io.on('connection',(socket) => {
   console.log('Connection accepted from client');
 
-  socket.emit('newMessage', {
-    from: 'diff amp',
-    text: 'could not make it',
-    createAt: 2342
-  });
-
   socket.on('createMessage', (message) => {
     console.log('Message created by clinet arrived ', message);
+    io.emit('newMessage', {
+      from: message.from,
+      text: message.text,
+      createdAt: new Date().getTime()
+    });
   });
 
   socket.on('disconnect', () => {
