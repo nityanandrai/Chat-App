@@ -15,13 +15,24 @@ app.use(express.static(publicPath));
 io.on('connection',(socket) => {
   console.log('Connection accepted from client');
 
+  socket.emit('newMessage', {
+    from: 'admin',
+    text: 'Welcome to chat room'
+  });
+
+  socket.broadcast.emit('newMessage', {
+    from: 'admin',
+    text: 'New user connected to chat room'
+  });
+
   socket.on('createMessage', (message) => {
     console.log('Message created by clinet arrived ', message);
-    io.emit('newMessage', {
-      from: message.from,
-      text: message.text,
-      createdAt: new Date().getTime()
-    });
+    // io.emit('newMessage', {
+    //   from: message.from,
+    //   text: message.text,
+    //   createdAt: new Date().getTime()
+    // });
+
   });
 
   socket.on('disconnect', () => {

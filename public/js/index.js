@@ -3,10 +3,10 @@ var socket = io();
 socket.on('connect', function () {
   console.log('Connected to server');
 
-  socket.emit('createMessage', {
-    from: 'negative feedback',
-    text: 'Cant amplify the signal  '
-  });
+  // socket.emit('createMessage', {
+  //   from: 'negative feedback',
+  //   text: 'Cant amplify the signal  '
+  // });
 
 });
 
